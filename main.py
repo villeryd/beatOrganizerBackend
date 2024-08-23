@@ -1,18 +1,10 @@
 from fastapi import FastAPI
 import datetime
+from schemas import Beat
 
 app = FastAPI()
 
-beats = {
-    1: {
-        "title": "fire",
-        "date": datetime.datetime.now().isoformat(),
-        "tags": {"trap", "fast", "drill"},
-        "genre": 'Hip-Hop',
-        "artwork": "",
-        "mp3": {}
-    }
-}
+beats = []
 
 
 @app.get('/')
@@ -23,3 +15,9 @@ async def root():
 @app.get("/get-beat/{beat_Id}")
 def get_beat(beat_Id: int):
     return beats[beat_Id]
+
+
+@app.post("/create-beat")
+async def create_beat(beat_object: Beat):
+    beats.append(beat_object)
+    return beats
