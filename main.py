@@ -1,6 +1,7 @@
+
 from fastapi import FastAPI
 import datetime
-from schemas import Beat
+from routers.beats.models import Beat
 
 app = FastAPI()
 
@@ -18,6 +19,6 @@ def get_beat(beat_Id: int):
 
 
 @app.post("/create-beat")
-async def create_beat(beat_object: Beat):
+async def create_beat(beat_object: Beat, response_model=Beat):
     beats.append(beat_object)
     return beats
