@@ -1,1 +1,1 @@
-from .models import (Beat, BeatUpdates)
+from .schemas import *

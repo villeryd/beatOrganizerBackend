@@ -1,20 +1,27 @@
-from fastapi import FastAPI
-from fastapi import APIRouter
-import datetime
-from pydantic import BaseModel, HttpUrl
-from uuid import uuid4
+from fastapi import APIRouter, Depends, HTTPException
+from .schemas import Beat
 
-router = APIRouter()
-
-
-class Beat(BaseModel):
-    title: str
-    date: datetime.datetime | None = datetime.datetime.now().isoformat()
-    tags: list[str] = []
-    genre: str
-    artwork: HttpUrl | None = None
+from sqlalchemy import Boolean, Column, String, ForeignKey, Integer
+from sqlalchemy.orm import relationship
+from database import Base
 
 
-class BeatUpdates(Beat):
-    id: int
-    likes: int
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=ForeignKey, index=True)
+    email = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+
+    beats = relationship('Beat', back_populates='owner')
+
+
+class Beat(Base):
+    __tablename__ = 'beats'
+
+    id = Column(Integer, primary_key=ForeignKey, index=True)
+    title = Column(String, index=True)
+    tags = Column(list[String], index=True)
+    genre = Column(String, index=True)
+    owner_id = Column(Integer, ForeignKey("users.id"))
+
+    owner = relationship("User", back_populates='beats')
