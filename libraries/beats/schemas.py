@@ -9,8 +9,6 @@ router = APIRouter()
 
 class BeatBase(BaseModel):
     title: str
-    date: datetime.datetime | None = datetime.datetime.now().isoformat()
-    tags: list[str] = []
     genre: str
     artwork: HttpUrl | None = None
 
