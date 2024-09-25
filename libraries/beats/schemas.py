@@ -11,6 +11,7 @@ class BeatBase(BaseModel):
     title: str
     genre: str
     artwork: HttpUrl | None = None
+    user_id: int
 
 
 class BeatCreate(BeatBase):

@@ -29,6 +29,7 @@ async def create_beat(beat: BeatBase, db: db_dependency):
         title=beat.title,
         genre=beat.genre,
         artwork=beat.artwork,
+        user_id=beat.user_id,
     )
     db.add(db_beat)
     db.commit()

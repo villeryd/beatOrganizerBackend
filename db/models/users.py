@@ -9,7 +9,8 @@ from ..database import Base
 
 class User(Base):
     __tablename__ = 'user'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(ForeignKey('user.id'), primary_key=True, index=True)
+    user_name = Column(String, index=True)
     email = Column(EmailType, unique=True, index=True)
     hashed_password = Column(String)
-    beats = relationship('beats', back_populates='user')
+    beats = relationship('beats', back_populates='user.id')

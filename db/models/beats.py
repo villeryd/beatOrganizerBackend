@@ -7,14 +7,11 @@ from sqlalchemy_utils import URLType
 from ..database import Base
 
 
-
-
 class Beat(Base):
     __tablename__ = 'beats'
 
     title = Column(String, index=True)
     genre = Column(String, index=True)
     artwork = Column(URLType, nullable=True)
-    owner_id = Column(Integer, ForeignKey('user.id'))
-    owner = relationship("User", back_populates='beats')
+    user_id = relationship("beats", back_populates='beats')
     id = Column(Integer, primary_key=True, index=True)
