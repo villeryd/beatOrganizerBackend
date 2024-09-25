@@ -32,4 +32,5 @@ async def create_beat(beat: BeatBase, db: db_dependency):
     )
     db.add(db_beat)
     db.commit()
-    return
+    db.refresh(db_beat)
+    return db_beat

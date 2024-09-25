@@ -7,7 +7,7 @@ import api.beats.api as beatsAPI
 from db.database import engine
 from db.models import users, beats
 
-# users.Base.metadata.create_all(bind=engine)
+users.Base.metadata.create_all(bind=engine)
 beats.Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="beats API"
