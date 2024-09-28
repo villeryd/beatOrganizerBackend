@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 from pydantic import BaseModel
-from libraries.users import (UserBase)
-from db.models.users import (User)
+from libraries.users import (User)
+from db.models.users import (UserBase)
 from db.database import engine, SessionLocal
 from typing import List, Annotated
 from sqlalchemy.orm import Session
